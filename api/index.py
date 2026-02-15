@@ -1,3 +1,4 @@
 from src.api.flask_app import app
 
-# Vercel needs the variable 'app' to be available in this file.
+# Vercel looks for a variable named 'app'
+# This file bridges the Vercel Serverless environment to our Flask app
