@@ -1,0 +1,189 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap');
+
+:root {
+  /* Light Theme Tokens */
+  --bg-primary: #f8fafc;
+  --bg-secondary: #ffffff;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-dim: #94a3b8;
+  --primary: #6366f1;
+  --primary-glow: rgba(99, 102, 241, 0.2);
+  --secondary: #ec4899;
+  --accent: #10b981;
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(99, 102, 241, 0.1);
+  --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+  --sidebar-w: 280px;
+}
+
+[data-theme='dark'] {
+  --bg-primary: #0a0c10;
+  --bg-secondary: #11141b;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-dim: #64748b;
+  --primary: #818cf8;
+  --primary-glow: rgba(129, 140, 248, 0.15);
+  --secondary: #fb7185;
+  --accent: #34d399;
+  --glass-bg: rgba(17, 20, 27, 0.8);
+  --glass-border: rgba(255, 255, 255, 0.05);
+  --card-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Outfit', sans-serif;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), color 0.4s ease;
+  overflow-x: hidden;
+}
+
+.app-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Sidebar Styling */
+.sidebar {
+  width: var(--sidebar-w);
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background: var(--bg-secondary);
+  border-right: 1px solid var(--glass-border);
+  display: flex;
+  flex-direction: column;
+  padding: 2.5rem 1.5rem;
+  z-index: 100;
+  transition: transform 0.3s ease;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 1rem 1.25rem;
+  border-radius: 16px;
+  cursor: pointer;
+  color: var(--text-secondary);
+  font-weight: 500;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-bottom: 0.75rem;
+}
+
+.nav-item:hover {
+  background: var(--primary-glow);
+  color: var(--primary);
+}
+
+.nav-item.active {
+  background: var(--primary);
+  color: white;
+  box-shadow: 0 8px 16px var(--primary-glow);
+}
+
+/* Main Content area */
+.main-content {
+  margin-left: var(--sidebar-w);
+  flex: 1;
+  padding: 3rem 4rem;
+  max-width: 1400px;
+}
+
+/* Glass Components */
+.glass-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--glass-border);
+  border-radius: 32px;
+  padding: 2.5rem;
+  box-shadow: var(--card-shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+/* Custom Glass Shorthand */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--glass-border);
+}
+
+/* Grid System */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2.5rem;
+  margin-top: 2rem;
+}
+
+/* Typography & Colors */
+.gradient-text {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 800;
+}
+
+/* Buttons */
+.btn-primary {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 15px -3px var(--primary-glow);
+}
+
+.btn-primary:hover {
+  filter: brightness(1.1);
+  transform: translateY(-2px);
+  box-shadow: 0 20px 25px -5px var(--primary-glow);
+}
+
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Select, Inputs */
+select,
+input[type="range"] {
+  outline: none;
+  appearance: none;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
