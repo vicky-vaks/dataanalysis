@@ -114,7 +114,7 @@ def normalize_location(loc):
 def health_check():
     return jsonify({"status": "active", "message": "AI Job Market Flask API is running"}), 200
 
-@app.route("/debug", methods=["GET"])
+@app.route("/api/debug", methods=["GET"])
 def debug_info():
     """Endpoint to assist with debugging deployment issues."""
     return jsonify({
@@ -128,7 +128,7 @@ def debug_info():
         "files_in_data": os.listdir(DATA_PATH) if os.path.exists(DATA_PATH) else "Path does not exist"
     })
 
-@app.route("/market_data", methods=["GET", "POST"])
+@app.route("/api/market_data", methods=["GET", "POST"])
 def get_market_data():
     try:
         # Check writable path first (uploaded file), then fallback to original
@@ -281,7 +281,7 @@ def get_market_data():
         logger.error(f"Market Data Error: {e}")
         return jsonify({"error": str(e)}), 500
 
-@app.route("/upload_csv", methods=["POST"])
+@app.route("/api/upload_csv", methods=["POST"])
 def upload_csv():
     if 'file' not in request.files:
         return jsonify({"error": "No file part"}), 400
@@ -301,7 +301,7 @@ def upload_csv():
             return jsonify({"error": f"Failed to process CSV: {e}"}), 500
     return jsonify({"error": "Invalid file type. Please upload a CSV."}), 400
 
-@app.route("/predict_salary", methods=["POST"])
+@app.route("/api/predict_salary", methods=["POST"])
 def predict_salary():
     if not assets: return jsonify({"error": "Model assets not loaded"}), 500
     data = request.json
@@ -351,7 +351,7 @@ def predict_salary():
         logger.error(f"Prediction Error: {e}")
         return jsonify({"error": str(e)}), 500
 
-@app.route("/recommend_skills", methods=["POST"])
+@app.route("/api/recommend_skills", methods=["POST"])
 def recommend_skills():
     if not assets: return jsonify({"error": "Model assets not loaded"}), 500
     data = request.json
@@ -393,7 +393,7 @@ def recommend_skills():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-@app.route("/get_role_skills", methods=["POST"])
+@app.route("/api/get_role_skills", methods=["POST"])
 def get_role_skills():
     if not assets: return jsonify({"error": "Model assets not loaded"}), 500
     try:
@@ -411,7 +411,7 @@ def get_role_skills():
     except Exception as e:
          return jsonify({"error": str(e)}), 500
 
-@app.route("/match_candidates", methods=["POST"])
+@app.route("/api/match_candidates", methods=["POST"])
 def match_candidates():
     if not assets: return jsonify({"error": "Model assets not loaded"}), 500
     data = request.json
